@@ -308,8 +308,8 @@ export const ManagementsolutionsList = [
 </p>
 
 <img
-max-width="300"
-max-height="400"
+max-width="350"
+max-height="450"
 
 src="https://s6.uupload.ir/files/d_fgh.png"
     />
@@ -593,7 +593,7 @@ src="https://s6.uupload.ir/files/d_fgh.png"
               `
        },
        {
-              id: 5, Title: 'عوارض زخم پای دیابتی', photo: require('./../Images/Foot.jpg'), Description: `
+              id: 5, Title: 'عوارض زخم پای دیابتی', photo: require('./../Images/Foots.jpg'), Description: `
               <p dir="RTL">
     ·          با نزدیک نگه داشتن  سطح قند خون خود تا حد نرمال، خطر ابتلا به
     تمام عوارض مرتبط با دیابت، از جمله مشکلات  پا را کاهش دهید. مدیریت دقیق سطح

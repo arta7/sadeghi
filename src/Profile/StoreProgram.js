@@ -2,7 +2,7 @@ import React, { useRef, useState, useEffect, useContext } from "react";
 import {
     StyleSheet, View,
     TouchableOpacity, Alert, ScrollView
-    , ActivityIndicator, BackHandler, FlatList, Image, useWindowDimensions, Text 
+    , ActivityIndicator, BackHandler, FlatList, Image, useWindowDimensions, Text
 } from "react-native";
 import axios from 'axios';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
@@ -28,9 +28,8 @@ import RenderHtml from 'react-native-render-html';
 
 
 
-
 export default StoreProgram = (props) => {
-    
+
     const [showIcon, setshowIcon] = useState(false)
     const drawerRef = useRef();
     // const value = useContext(Redux);
@@ -45,18 +44,18 @@ export default StoreProgram = (props) => {
         drawerRef?.current._root.open()
     }
 
-    const {width} = useWindowDimensions();
-    
-   
-    let  computeEmbeddedMaxWidth=(contentWidth, tagName)=> {
+    const { width } = useWindowDimensions();
+
+
+    let computeEmbeddedMaxWidth = (contentWidth, tagName) => {
         if (tagName === 'img') {
-          return Math.min(contentWidth, 300);
+            return Math.min(contentWidth, 300);
         }
         return contentWidth;
-      }
+    }
 
 
- 
+
 
     return (
         <View style={styles.root}>
@@ -113,29 +112,18 @@ export default StoreProgram = (props) => {
 
 
                         <RenderHtml
-                        
-                            // renderers={{
-                            //     img: (attribs,ss,sss) => {
-                            //        const imagePath = attribs.source;
-                            //             console.log('attribs 1 ',domNodeToHTMLString(attribs.domNode))
-                            //             console.log('attribs 2 ',ss)
-                            //             console.log('attribs 3 ',sss)
-                            //         return (
-                            //             <Image
-                            //                 key={attribs.source}
-                            //                 style={{ width: '80%', height: hp(25), marginHorizontal: '10%' }}
-                            //                 source={imagesList[imagePath]}
-                            //             />
-                            //         );
-                            //     },
-                            // }}
-                            // alterNode={alterNode}
+                            computeEmbeddedMaxWidth={computeEmbeddedMaxWidth}
                             contentWidth={width}
-                            source={{ html: ` <body style="font-size: 1.2rem;text-align: justify;direction:rtl" >
-                            
-                            ` + data.Description + `</body> ` }}
 
+                            source={{
+                                html: `
+                             <html lang="ar"  style="font-size: 1.25rem;text-align: right" dir="rtl">
+                             <body style="font-size: 1.25rem;text-align: right">  
+                            ` + data.Description + `</body></html> `
+                            }}
                         />
+                        
+
 
                     </View>
 
@@ -160,7 +148,7 @@ const styles = StyleSheet.create({
     rootProgram:
     {
         width: wp('90%'), marginHorizontal: wp('5%'), borderWidth: 0.5
-        , borderColor: 'grey', borderRadius: 10, marginBottom: 10,textAlign:'right',padding:4
+        , borderColor: 'grey', borderRadius: 10, marginBottom: 10, textAlign: 'right', padding: 4
     },
     BottomView:
     {

@@ -300,10 +300,20 @@ export default DrugsTodo = (props) => {
                         setEditClick(0)
                         setShowModal(false)
                     }}
-                    ViewStyle={{ height: 350, width: '100%' }}
+                    ViewStyle={{ height: 450, width: '100%' }}
                     Children={
                         <View style={{ width: '90%', marginHorizontal: '5%' }}>
+                        <View style={{
+                                justifyContent: 'center', alignItems: 'center', width: ('80%'),
+                                marginHorizontal: wp(10), borderRadius: 10, borderWidth: 0.5, elevation: 2, marginTop: 10, backgroundColor: '#deeafc', marginBottom: 10
 
+                            }}>
+                                <Text style={{
+                                textAlign: "center",
+                                color: "red",
+                                fontSize: wp(3), padding: 10
+                                }}>لطفا ساعت گوشی خود را برای اعلان هشدار دقیق از قبل تنظیم کنید</Text>
+                            </View> 
                             <TextInputs
                                 changeText={(value) => { setName(value) }}
                                 values={Name}

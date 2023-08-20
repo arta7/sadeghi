@@ -222,8 +222,8 @@ export default Profiles = (props) => {
 
                 </View> */}
         </View>
-        <ScrollView>
-          <View style={{ width: wp('100%'), height: hp('30%') }}>
+       
+          <View style={{ width: wp('100%'), height: hp('25%') }}>
             <View style={{ justifyContent: 'center', alignSelf: 'center', alignItems: 'center', marginTop: '15%' }}>
               <CircleLogo
                 onPress={() => { }}
@@ -250,9 +250,9 @@ export default Profiles = (props) => {
 
 
 
-
+          <ScrollView>
           <View style={{
-            width: wp('100%'), height: hp('70%')
+            width: wp('100%'), height: hp('80%')
             , backgroundColor: 'white', borderTopLeftRadius: 50, borderTopRightRadius: 50
             , borderTopWidth: 1, borderTopColor: 'transparent'
           }}>
