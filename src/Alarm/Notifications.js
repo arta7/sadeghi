@@ -29,7 +29,7 @@ class Notifications {
         channelDescription: 'Reminder for any tasks',
         playSound:true,
         vibrate:true,
-        soundName:'default'
+        soundName:'./../Images/sound.wav'
         
       },
       () => {},
@@ -48,7 +48,7 @@ class Notifications {
       message: message,
       date,
       playSound:true,
-      soundName:'default',
+      soundName:'./../Images/sound.wav',
        vibrate:true,
        
       
@@ -64,7 +64,7 @@ class Notifications {
       message: message,
       date,
       playSound:true,
-      soundName:'default',
+      soundName:'./../Images/sound.wav',
       vibrate:true,
       repeatType:'day',
       repeatTime:1, 

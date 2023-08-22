@@ -40,7 +40,7 @@ export default BloodTest = (props) => {
     const drawerRef = useRef();
     const [showModal, setShowModal] = useState(false)
     const [showDateModal, setshowDateModal] = useState(false)
-    const [Time, setTime] = useState('')
+    const [Time, setTime] = useState('ناشتا')
     const [Amount, setAmount] = useState('')
     const [Counter, setCounter] = useState(1)
     const [BloodTestList, setBloodTestList] = useState([])
@@ -56,11 +56,11 @@ export default BloodTest = (props) => {
     const pickerRef = useRef();
 
     function open() {
-      pickerRef.current.focus();
+        pickerRef.current.focus();
     }
-  
+
     function close() {
-      pickerRef.current.blur();
+        pickerRef.current.blur();
     }
 
     let closeDrawer = () => {
@@ -133,7 +133,7 @@ export default BloodTest = (props) => {
                 })
             }
             else {
-                
+
                 let pr = realm.objects('BloodTestList').filtered('Id = $0', selectedId)
                 realm.write(() => {
                     realm.delete(pr)
@@ -141,7 +141,7 @@ export default BloodTest = (props) => {
 
                 var ID = 100000 + realm.objects('BloodTestList').length + 1;
                 console.log('ID', ID.toString())
-            
+
 
                 realm.write(() => {
 
@@ -240,16 +240,91 @@ export default BloodTest = (props) => {
                 </View> */}
                 </View>
 
+
+                <View style={{
+                    width: wp(90), height: 50, marginHorizontal: wp(5),
+                    elevation: 2, borderWidth: 1, borderColor: 'transparent'
+                    , borderRadius: 5, marginTop: 30, flexDirection: 'row-reverse', backgroundColor: '#c7ddfc', justifyContent: 'space-between'
+                }}>
+                    <View style={{ width: '20%', height: '100%',justifyContent:'center',alignItems:'center',borderLeftWidth:1 }}>
+                    <Text style={{color:'black',fontSize:wp(2.5),fontWeight:'bold'}}>میزان قند خون</Text>
+                    </View>
+
+                    <View style={{ width: '30%', height: '100%',justifyContent:'center',alignItems:'center',borderLeftWidth:1 }}>
+                    <Text style={{color:'black',fontSize:wp(2.5),fontWeight:'bold'}}>زمان تست</Text>
+                    
+                    </View>
+                    <View style={{ width: '25%', height: '100%',justifyContent:'center',alignItems:'center',borderLeftWidth:1 }}>
+                    <Text style={{color:'black',fontSize:wp(2.5),fontWeight:'bold'}}>تاریخ تست</Text>
+                    </View>
+                    <View style={{ width: '25%', height: '100%',justifyContent:'center',alignItems:'center' }}>
+
+                    </View>
+                </View>
+
                 <FlatList
                     data={BloodTestList}
                     renderItem={({ item, index }) =>
+
+                        // <View style={{
+                        //     width: wp(90), height: hp(15), marginHorizontal: wp(5),
+                        //     elevation: 2, borderWidth: 1, borderColor: 'transparent'
+                        //     , borderRadius: 5, marginVertical: 10, flexDirection: 'row', backgroundColor: '#c7ddfc', justifyContent: 'space-between'
+                        // }}>
+                        //     <View style={{ width: '40%', height: '100%', flexDirection: 'row', padding: 5, alignItems: 'center' }}>
+                        //         <TouchableOpacity style={{ paddingHorizontal: 20 }}
+                        //             onPress={() => { DeleteِBloodTestList(item.Id) }}
+                        //         >
+                        //             <Icon name='delete' color='rgba(9,132,226,1)' type="materialicon" size={wp(6)} />
+                        //         </TouchableOpacity>
+                        //         <TouchableOpacity style={{ paddingHorizontal: 20 }}
+                        //             onPress={() => {
+                        //                 setEditClick(1)
+                        //                 setselectedId(item.Id)
+                        //                 setAmount(item.Amount)
+                        //                 setTime(item.Time)
+                        //                 let mydate = new Date(item.Date);
+                        //                 setselectedGeStartDate(mydate);
+                        //                 var dataJalali = moment(mydate).format('jYYYY-jMM-jDD');
+                        //                 setsetselectedStartDate(dataJalali)
+                        //                 setselectedShowDate(dataJalali)
+
+                        //                 setShowModal(true)
+
+                        //             }}
+                        //         >
+                        //             <Icon name='edit' color='rgba(9,132,226,1)' type="materialicon" size={wp(6)} />
+                        //         </TouchableOpacity >
+                        //     </View>
+                        //     <View style={{ width: '60%', paddingHorizontal: 15, justifyContent: 'center' }}>
+                        //         <Text style={{ fontSize: wp(3.5), color: 'black', textAlign: 'right' }} numberOfLines={1}>{item.Amount}</Text>
+                        //         <Text style={{ fontSize: wp(3.5), color: 'black', textAlign: 'right' }} numberOfLines={1}>{item.Time}</Text>
+                        //         <Text style={{ fontSize: wp(3.5), color: 'black', textAlign: 'right' }}>{moment(new Date(item.Date)).format('jYYYY-jMM-jDD')}</Text>
+
+
+                        //     </View>
+
+
+                        // </View>
+
                         <View style={{
-                            width: wp(90), height: hp(15), marginHorizontal: wp(5),
-                            elevation: 2, borderWidth: 1, borderColor: 'transparent'
-                            , borderRadius: 5, marginVertical: 10, flexDirection: 'row', backgroundColor: '#c7ddfc', justifyContent: 'space-between'
+                            width: wp(90), height: 50, marginHorizontal: wp(5),
+                            borderWidth: 1, borderColor: 'transparent'
+                            , flexDirection: 'row-reverse', backgroundColor: '#c7ddfc', justifyContent: 'space-between',borderBottomColor:'gray'
                         }}>
-                            <View style={{ width: '40%', height: '100%', flexDirection: 'row', padding: 5, alignItems: 'center' }}>
-                                <TouchableOpacity style={{ paddingHorizontal: 20 }}
+                           <View style={{ width: '20%', height: '100%',justifyContent:'center',borderLeftWidth:1,justifyContent:'center',alignItems:'center' }}>
+                           <Text style={{ fontSize: wp(2.5), color: 'black', textAlign: 'right' }} numberOfLines={1}>{item.Amount}</Text>
+                    </View>
+
+                    <View style={{ width: '30%', height: '100%',justifyContent:'center',borderLeftWidth:1,alignItems:'center' }}>
+                    <Text style={{ fontSize: wp(3), color: 'black', textAlign: 'right' }} numberOfLines={1}>{item.Time}</Text>
+                    </View>
+                    <View style={{ width: '25%', height: '100%',justifyContent:'center',borderLeftWidth:1,alignItems:'center' }}>
+                 
+                    <Text style={{ fontSize: wp(2.5), color: 'black', textAlign: 'right' }}>{moment(new Date(item.Date)).format('jYYYY-jMM-jDD')}</Text>
+                    </View>
+                         <View style={{ width: '25%', height: '100%', flexDirection: 'row', padding: 5,justifyContent:'center',alignItems:'center' }}>
+                                 <TouchableOpacity style={{ paddingHorizontal: 20 }}
                                     onPress={() => { DeleteِBloodTestList(item.Id) }}
                                 >
                                     <Icon name='delete' color='rgba(9,132,226,1)' type="materialicon" size={wp(6)} />
@@ -273,15 +348,6 @@ export default BloodTest = (props) => {
                                     <Icon name='edit' color='rgba(9,132,226,1)' type="materialicon" size={wp(6)} />
                                 </TouchableOpacity >
                             </View>
-                            <View style={{ width: '60%', paddingHorizontal: 15, justifyContent: 'center' }}>
-                                <Text style={{ fontSize: wp(3.5), color: 'black', textAlign: 'right' }} numberOfLines={1}>{item.Amount}</Text>
-                                <Text style={{ fontSize: wp(3.5), color: 'black', textAlign: 'right' }} numberOfLines={1}>{item.Time}</Text>
-                                <Text style={{ fontSize: wp(3.5), color: 'black', textAlign: 'right' }}>{moment(new Date(item.Date)).format('jYYYY-jMM-jDD')}</Text>
-                               
-
-                            </View>
-
-
                         </View>
 
                     }
@@ -301,6 +367,7 @@ export default BloodTest = (props) => {
                 <CenterModals
                     showModal={showModal}
                     closeModal={() => { setShowModal(false) }}
+                    ViewStyle={{ height: 400, width: '100%' }}
                     Children={
                         <View style={{ width: '90%', marginHorizontal: '5%' }}>
 
@@ -324,43 +391,43 @@ export default BloodTest = (props) => {
                                 </TouchableOpacity>
 
 
-                             
-                            </View>
-                            <View style={{flexDirection:'row-reverse',justifyContent:"center",alignItems:'center',width:'100%',}}>
-                            <View style={{width:'20%',justifyContent:"center",alignItems:'center'}}>
-                                 <Text style={{ fontSize: wp('3.5%'), color: 'black', marginTop: 5 }}>زمان  : </Text>
-                                 </View>
-                          
-                            
-                            <View style={{
-                                width: ('60%')
-                                , height: hp('7%')
-                                , borderWidth: 1, borderRadius: 10, justifyContent:"center",alignItems:'center', borderColor: "rgba(9,132,226,1)"
-                               
-                            }}>
-                              
-                                 <View style={{width:'100%'}}>
-                                <SelectPicker
-                                    ref={pickerRef}
-                                    mode="dropdown"
-                                    selectionColor='rgba(9,132,226,1)'
-                                    selectedValue={Time}
 
-                                    onValueChange={(itemValue, itemIndex) =>
-                                        setTime(itemValue)
-                                    }>
-                                    <SelectPicker.Item label="ناشتا" value="ناشتا" />
-                                    <SelectPicker.Item label="دو ساعت بعد از صبحانه" value="دو ساعت بعد از صبحانه" />
-                                    <SelectPicker.Item label="قبل از ناهار" value="قبل از ناهار" />
-                                    <SelectPicker.Item label="دو ساعت بعد از نهار" value="دو ساعت بعد از نهار" />
-                                    <SelectPicker.Item label="قبل از شام" value="قبل از شام" />
-                                    <SelectPicker.Item label="دو ساعت بعد از شام" value="دو ساعت بعد از شام" />
-                                    <SelectPicker.Item label="زمان خواب" value="زمان خواب" />
-                                </SelectPicker>
+                            </View>
+                            <View style={{ flexDirection: 'row-reverse', justifyContent: "center", alignItems: 'center', width: '100%', }}>
+                                <View style={{ width: '20%', justifyContent: "center", alignItems: 'center' }}>
+                                    <Text style={{ fontSize: wp('3.5%'), color: 'black', marginTop: 5 }}>زمان  : </Text>
+                                </View>
+
+
+                                <View style={{
+                                    width: ('60%')
+                                    , height: hp('7%')
+                                    , borderWidth: 1, borderRadius: 10, justifyContent: "center", alignItems: 'center', borderColor: "rgba(9,132,226,1)"
+
+                                }}>
+
+                                    <View style={{ width: '100%' }}>
+                                        <SelectPicker
+                                            ref={pickerRef}
+                                            mode="dropdown"
+                                            selectionColor='rgba(9,132,226,1)'
+                                            selectedValue={Time}
+
+                                            onValueChange={(itemValue, itemIndex) =>
+                                                setTime(itemValue)
+                                            }>
+                                            <SelectPicker.Item label="ناشتا" value="ناشتا" />
+                                            <SelectPicker.Item label="دو ساعت بعد از صبحانه" value="دو ساعت بعد از صبحانه" />
+                                            <SelectPicker.Item label="قبل از ناهار" value="قبل از ناهار" />
+                                            <SelectPicker.Item label="دو ساعت بعد از نهار" value="دو ساعت بعد از نهار" />
+                                            <SelectPicker.Item label="قبل از شام" value="قبل از شام" />
+                                            <SelectPicker.Item label="دو ساعت بعد از شام" value="دو ساعت بعد از شام" />
+                                            <SelectPicker.Item label="زمان خواب" value="زمان خواب" />
+                                        </SelectPicker>
+                                    </View>
                                 </View>
                             </View>
-                            </View>
-                           
+
 
                             <TextInputs
                                 changeText={(value) => { setAmount(value) }}
@@ -384,13 +451,14 @@ export default BloodTest = (props) => {
                                 IconView={{ backgroundColor: 'rgba(9,132,226,1)' }}
                                 ErrorTitleStyle={{ color: 'white' }}
                                 placeholderTextColor={'rgba(9,132,226,1)'}
+                                keyboardtype={"numeric"}
                             />
 
 
 
 
 
-                            <View style={{ justifyContent: 'center', alignItems: 'center',marginTop:40 }}>
+                            <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: 40 }}>
                                 <TouchableOpacity style={{
                                     borderRadius: 5, width: wp(25), height: 50, justifyContent: 'center'
                                     , backgroundColor: 'rgba(9,132,226,1)', elevation: 1
@@ -440,14 +508,14 @@ export default BloodTest = (props) => {
                                         <PersianCalendarPicker
                                             onDateChange={onDateChange}
                                             scaleFactor={wp(100)}
-                                            minDate={new Date()}
+                                            // minDate={new Date()}
 
                                             initialDate={moment.utc(selectedGeShowDate)}
 
                                         //  customDatesStyles={{date: selectedGeShowDate, containerStyle: {backgroundColor:'#5ce600'}, style: {backgroundColor:'#5ce600'}, textStyle: {color:'black'}}}
 
 
-                                        /> 
+                                        />
 
 
                                     </>
