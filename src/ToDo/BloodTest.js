@@ -246,18 +246,19 @@ export default BloodTest = (props) => {
                     elevation: 2, borderWidth: 1, borderColor: 'transparent'
                     , borderRadius: 5, marginTop: 30, flexDirection: 'row-reverse', backgroundColor: '#c7ddfc', justifyContent: 'space-between'
                 }}>
-                    <View style={{ width: '20%', height: '100%',justifyContent:'center',alignItems:'center',borderLeftWidth:1 }}>
-                    <Text style={{color:'black',fontSize:wp(2.5),fontWeight:'bold'}}>میزان قند خون</Text>
+
+                    <View style={{ width: '25%', height: '100%', justifyContent: 'center', alignItems: 'center', borderLeftWidth: 1 }}>
+                        <Text style={{ color: 'black', fontSize: wp(2.5), fontWeight: 'bold' }}>تاریخ تست</Text>
+                    </View>
+                    <View style={{ width: '30%', height: '100%', justifyContent: 'center', alignItems: 'center', borderLeftWidth: 1 }}>
+                        <Text style={{ color: 'black', fontSize: wp(2.5), fontWeight: 'bold' }}>زمان تست</Text>
+
+                    </View>
+                    <View style={{ width: '20%', height: '100%', justifyContent: 'center', alignItems: 'center', borderLeftWidth: 1 }}>
+                        <Text style={{ color: 'black', fontSize: wp(2.5), fontWeight: 'bold' }}>میزان قند خون</Text>
                     </View>
 
-                    <View style={{ width: '30%', height: '100%',justifyContent:'center',alignItems:'center',borderLeftWidth:1 }}>
-                    <Text style={{color:'black',fontSize:wp(2.5),fontWeight:'bold'}}>زمان تست</Text>
-                    
-                    </View>
-                    <View style={{ width: '25%', height: '100%',justifyContent:'center',alignItems:'center',borderLeftWidth:1 }}>
-                    <Text style={{color:'black',fontSize:wp(2.5),fontWeight:'bold'}}>تاریخ تست</Text>
-                    </View>
-                    <View style={{ width: '25%', height: '100%',justifyContent:'center',alignItems:'center' }}>
+                    <View style={{ width: '25%', height: '100%', justifyContent: 'center', alignItems: 'center' }}>
 
                     </View>
                 </View>
@@ -310,21 +311,23 @@ export default BloodTest = (props) => {
                         <View style={{
                             width: wp(90), height: 50, marginHorizontal: wp(5),
                             borderWidth: 1, borderColor: 'transparent'
-                            , flexDirection: 'row-reverse', backgroundColor: '#c7ddfc', justifyContent: 'space-between',borderBottomColor:'gray'
+                            , flexDirection: 'row-reverse', backgroundColor: '#c7ddfc', justifyContent: 'space-between', borderBottomColor: 'gray'
                         }}>
-                           <View style={{ width: '20%', height: '100%',justifyContent:'center',borderLeftWidth:1,justifyContent:'center',alignItems:'center' }}>
-                           <Text style={{ fontSize: wp(2.5), color: 'black', textAlign: 'right' }} numberOfLines={1}>{item.Amount}</Text>
-                    </View>
 
-                    <View style={{ width: '30%', height: '100%',justifyContent:'center',borderLeftWidth:1,alignItems:'center' }}>
-                    <Text style={{ fontSize: wp(3), color: 'black', textAlign: 'right' }} numberOfLines={1}>{item.Time}</Text>
-                    </View>
-                    <View style={{ width: '25%', height: '100%',justifyContent:'center',borderLeftWidth:1,alignItems:'center' }}>
-                 
-                    <Text style={{ fontSize: wp(2.5), color: 'black', textAlign: 'right' }}>{moment(new Date(item.Date)).format('jYYYY-jMM-jDD')}</Text>
-                    </View>
-                         <View style={{ width: '25%', height: '100%', flexDirection: 'row', padding: 5,justifyContent:'center',alignItems:'center' }}>
-                                 <TouchableOpacity style={{ paddingHorizontal: 20 }}
+                            <View style={{ width: '25%', height: '100%', justifyContent: 'center', borderLeftWidth: 1, alignItems: 'center' }}>
+
+                                <Text style={{ fontSize: wp(2.5), color: 'black', textAlign: 'right' }}>{moment(new Date(item.Date)).format('jYYYY-jMM-jDD')}</Text>
+                            </View>
+                            <View style={{ width: '30%', height: '100%', justifyContent: 'center', borderLeftWidth: 1, alignItems: 'center' }}>
+                                <Text style={{ fontSize: wp(3), color: 'black', textAlign: 'right' }} numberOfLines={1}>{item.Time}</Text>
+                            </View>
+
+
+                            <View style={{ width: '20%', height: '100%', justifyContent: 'center', borderLeftWidth: 1, justifyContent: 'center', alignItems: 'center' }}>
+                                <Text style={{ fontSize: wp(2.5), color: 'black', textAlign: 'right' }} numberOfLines={1}>{item.Amount}</Text>
+                            </View>
+                            <View style={{ width: '25%', height: '100%', flexDirection: 'row', padding: 5, justifyContent: 'center', alignItems: 'center' }}>
+                                <TouchableOpacity style={{ paddingHorizontal: 20 }}
                                     onPress={() => { DeleteِBloodTestList(item.Id) }}
                                 >
                                     <Icon name='delete' color='rgba(9,132,226,1)' type="materialicon" size={wp(6)} />
@@ -345,7 +348,7 @@ export default BloodTest = (props) => {
 
                                     }}
                                 >
-                                    <Icon name='edit' color='rgba(9,132,226,1)' type="materialicon" size={wp(6)} />
+                                    <Icon name='edit' color='rgba(9,132,226,1)' type="materialicon" size={wp(5)} />
                                 </TouchableOpacity >
                             </View>
                         </View>
@@ -482,43 +485,44 @@ export default BloodTest = (props) => {
                                 }}
                                 ViewStyle={{ height: 500, width: '100%' }}
                                 Children={
-                                    <>
-                                        <View style={{ marginHorizontal: wp(2), flexDirection: 'row', justifyContent: 'space-between' }}>
-                                            <TouchableOpacity style={{ backgroundColor: 'rgba(9,132,226,1)', borderRadius: 5, width: 100, height: 40 }}
-                                                onPress={() => {
-                                                    var x = selectedGeStartDate.toLocaleDateString('en-US') + ' ' + selectedTime.toLocaleTimeString('en-US')
-                                                    console.log('x Date : ', new Date(x))
-                                                    setselectedShowDate(selectedStartDate)
-                                                    setselectedGeShowDate(new Date(x))
-                                                    setshowDateModal(false)
-                                                }}
-                                            >
-                                                <Text style={{ fontSize: wp(4), textAlign: 'center', color: 'white' }}>تایید</Text>
-                                            </TouchableOpacity>
-                                            <TouchableOpacity style={{ backgroundColor: '#c7ddfc', borderRadius: 5, width: 100, height: 40 }}
-                                                onPress={() => { setshowDateModal(false) }}
-                                            >
-                                                <Text style={{ fontSize: wp(4), textAlign: 'center', color: 'black' }}>لغو</Text>
-                                            </TouchableOpacity>
+                                    <View style={{ width: '100%' }}>
+                                        <ScrollView>
+                                            <View style={{ marginHorizontal: wp(2), flexDirection: 'row', justifyContent: 'space-between' }}>
+                                                <TouchableOpacity style={{ backgroundColor: 'rgba(9,132,226,1)', borderRadius: 5, width: 100, height: 40, alignItems: 'center', justifyContent: 'center' }}
+                                                    onPress={() => {
+                                                        var x = selectedGeStartDate.toLocaleDateString('en-US') + ' ' + selectedTime.toLocaleTimeString('en-US')
+                                                        console.log('x Date : ', new Date(x))
+                                                        setselectedShowDate(selectedStartDate)
+                                                        setselectedGeShowDate(new Date(x))
+                                                        setshowDateModal(false)
+                                                    }}
+                                                >
+                                                    <Text style={{ fontSize: wp(4), textAlign: 'center', color: 'white' }}>تایید</Text>
+                                                </TouchableOpacity>
+                                                <TouchableOpacity style={{ backgroundColor: '#c7ddfc', borderRadius: 5, width: 100, height: 40, alignItems: 'center', justifyContent: 'center' }}
+                                                    onPress={() => { setshowDateModal(false) }}
+                                                >
+                                                    <Text style={{ fontSize: wp(4), textAlign: 'center', color: 'black' }}>لغو</Text>
+                                                </TouchableOpacity>
 
-                                        </View>
-
-
-                                        <Text style={{ textAlign: 'right', fontSize: wp(4), fontWeight: 'bold', padding: 15 }}>تاریخ :  </Text>
-                                        <PersianCalendarPicker
-                                            onDateChange={onDateChange}
-                                            scaleFactor={wp(100)}
-                                            // minDate={new Date()}
-
-                                            initialDate={moment.utc(selectedGeShowDate)}
-
-                                        //  customDatesStyles={{date: selectedGeShowDate, containerStyle: {backgroundColor:'#5ce600'}, style: {backgroundColor:'#5ce600'}, textStyle: {color:'black'}}}
+                                            </View>
 
 
-                                        />
+                                            <Text style={{ textAlign: 'right', fontSize: wp(4), fontWeight: 'bold', padding: 15 }}>تاریخ :  </Text>
+                                            <PersianCalendarPicker
+                                                onDateChange={onDateChange}
+                                                scaleFactor={wp(110)}
+                                                // minDate={new Date()}
+
+                                                initialDate={moment.utc(selectedGeShowDate)}
+
+                                            //  customDatesStyles={{date: selectedGeShowDate, containerStyle: {backgroundColor:'#5ce600'}, style: {backgroundColor:'#5ce600'}, textStyle: {color:'black'}}}
 
 
-                                    </>
+                                            />
+
+                                        </ScrollView>
+                                    </View>
                                 }
                             />
 
