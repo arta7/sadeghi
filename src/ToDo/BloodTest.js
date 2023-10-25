@@ -120,8 +120,16 @@ export default BloodTest = (props) => {
         if (Amount != '' && Time != '' && selectedShowDate != null) {
 
             if (EditClick == 0) {
-                var ID = 100000 + realm.objects('BloodTestList').length + 1;
+                var ID = 300000 + realm.objects('BloodTestListControl').length + 1;
                 console.log('ID', ID.toString())
+
+                realm.write(() => {
+
+                    realm.create('BloodTestListControl', {
+                        Id: ID
+                    });
+                })
+
                 realm.write(() => {
 
                     realm.create('BloodTestList', {
@@ -139,9 +147,15 @@ export default BloodTest = (props) => {
                     realm.delete(pr)
                 })
 
-                var ID = 100000 + realm.objects('BloodTestList').length + 1;
+                var ID = 300000 + realm.objects('BloodTestListControl').length + 1;
                 console.log('ID', ID.toString())
 
+                realm.write(() => {
+
+                    realm.create('BloodTestListControl', {
+                        Id: ID
+                    });
+                })
 
                 realm.write(() => {
 
@@ -160,7 +174,7 @@ export default BloodTest = (props) => {
             setEditClick(0)
             setselectedId(0)
             setAmount('')
-            setTime('')
+            setTime('ناشتا')
             setselectedShowDate(null)
 
 
@@ -171,7 +185,7 @@ export default BloodTest = (props) => {
     }
 
     let SelectBloodTestList = () => {
-        let pr = realm.objects('BloodTestList')
+        let pr = realm.objects('BloodTestList').sorted('Date', false);
         if (pr.length > 0) {
             setBloodTestList(pr)
         }
@@ -512,7 +526,8 @@ export default BloodTest = (props) => {
                                             <PersianCalendarPicker
                                                 onDateChange={onDateChange}
                                                 scaleFactor={wp(110)}
-                                                // minDate={new Date()}
+                                                maxDate={new Date()}
+                                                
 
                                                 initialDate={moment.utc(selectedGeShowDate)}
 

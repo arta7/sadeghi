@@ -34,6 +34,25 @@ const realm = new Realm({
         },
       },
 
+      {
+        name: 'DoctorsListControl',
+        properties: {
+          Id: { type: 'int', default: 0 }
+        },
+      },
+      {
+        name: 'DrugsListControl',
+        properties: {
+          Id: { type: 'int', default: 0 }
+        },
+      },
+      {
+        name: 'BloodTestListControl',
+        properties: {
+          Id: { type: 'int', default: 0 }
+        },
+      },
+
     ],
   })
 

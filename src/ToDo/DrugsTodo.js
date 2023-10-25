@@ -83,19 +83,28 @@ export default DrugsTodo = (props) => {
                 setshowDateModal(false)
                 
                 var ID ;
-                    if(realm.objects('DrugsList').length ==  0)
+                    // if(realm.objects('DrugsList').length ==  0)
                     {
-                        ID =  realm.objects('DrugsList').length + 1;
+                        ID =  realm.objects('DrugsListControl').length + 1;
                     }
-                    else
-                    {
-                        var pr = realm.objects('DrugsList');
-                            ID = pr[pr.length-1].Id +1
-                    }
+                    // else
+                    // {
+                    //     var pr = realm.objects('DrugsList');
+                    //         ID = pr[pr.length-1].Id +1
+                    // }
 
 
                 console.log('ID', ID.toString())
-                Notifications.schduleRepeatNotification(new Date(Time), ID.toString(), ' دارو ' + Name, ' دوز دارو' + Dozes);
+                Notifications.schduleRepeatNotification(new Date(Time), ID.toString(), ' دارو ' + Name, ' دوز دارو ' + Dozes);
+
+                realm.write(() => {
+
+                    realm.create('DrugsListControl', {
+                        Id: ID
+                    });
+                })
+
+
                 realm.write(() => {
 
                     realm.create('DrugsList', {
@@ -160,7 +169,7 @@ export default DrugsTodo = (props) => {
     }
 
     let SelectDrugsList = () => {
-        let pr = realm.objects('DrugsList')
+        let pr = realm.objects('DrugsList').sorted('Time', false)
         if (pr.length > 0) {
              console.log('pr',pr[pr.length-1].Id)
             setDrugsList(pr)

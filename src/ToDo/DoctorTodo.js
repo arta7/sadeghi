@@ -127,19 +127,25 @@ export default DoctorTodo = (props) => {
             {
             if (EditClick == 0) {
                 var ID ;
-                if(realm.objects('DoctorsList').length ==  0)
-                {
-                    ID = 100000 + realm.objects('DoctorsList').length + 1;
-                }
-                else
-                {
-                    var pr = realm.objects('DoctorsList');
-                        ID = pr[pr.length-1].Id +1
-                }
+                //if(realm.objects('DoctorsListControl').length ==  0)
+                
+                    ID = 100000 + realm.objects('DoctorsListControl').length + 1;
+                
+                // else
+                // {
+                //     var pr = realm.objects('DoctorsList');
+                //         ID = pr[pr.length-1].Id +1
+                // }
                 // var ID = 100000 + realm.objects('DoctorsList').length + 1;
                 console.log('ID', ID.toString())
                 Notifications.schduleNotification(new Date(selectedGeShowDate), ID.toString(), ' قرار ملاقات با دکتر ' + Name, ' آدرس مطب' + Address);
 
+                realm.write(() => {
+
+                    realm.create('DoctorsListControl', {
+                        Id: ID
+                    });
+                })
                 realm.write(() => {
 
                     realm.create('DoctorsList', {
@@ -197,7 +203,7 @@ export default DoctorTodo = (props) => {
     }
 
     let SelectDoctorList = () => {
-        let pr = realm.objects('DoctorsList')
+        let pr = realm.objects('DoctorsList').sorted('Date', true).sorted('Time', true)
         if (pr.length > 0) {
             setDoctorLists(pr)
         }
