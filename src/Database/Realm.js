@@ -30,7 +30,8 @@ const realm = new Realm({
           Id: { type: 'int', default: 0 },
           Amount: 'string',
           Time: 'string',
-          Date:'string'
+          Date:'string',
+          ItemIndex:'string'
         },
       },
 

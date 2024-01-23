@@ -89,6 +89,9 @@ export default DoctorTodo = (props) => {
 
     }
 
+
+  
+
     useEffect(() => {
 
 
@@ -97,7 +100,7 @@ export default DoctorTodo = (props) => {
         SelectDoctorList()
 
 
-    }, [Counter])
+    }, [])
 
 
     let DeleteِDoctorList = (_id) => {
@@ -113,7 +116,7 @@ export default DoctorTodo = (props) => {
                     realm.write(() => {
                         realm.delete(pr)
                     })
-                    setCounter(Counter + 1)
+                    SelectDoctorList()
                 }
             },
         ])
@@ -184,12 +187,13 @@ export default DoctorTodo = (props) => {
 
             }
             setShowModal(false)
-            setCounter(Counter + 1)
+            // setCounter(Counter + 1)
             setEditClick(0)
             setselectedId(0)
             setName('')
             setAddress('')
             setselectedShowDate(null)
+            SelectDoctorList()
         }
         else
         {
@@ -201,10 +205,39 @@ export default DoctorTodo = (props) => {
             Alert.alert('لطفا اطلاعات را درست وارد کنید')
         }
     }
+    function fieldSorter(fields) {
+        return function (a, b) {
+            return fields
+                .map(function (o) {
+                    var dir = 1;
+                    if (o[0] === '-') {
+                       dir = -1;
+                       o=o.substring(1);
+                    }
+                    if (a[o] > b[o]) return dir;
+                    if (a[o] < b[o]) return -(dir);
+                    return 0;
+                })
+                .reduce(function firstNonZeroValue (p,n) {
+                    return p ? p : n;
+                }, 0);
+        };
+    }
 
     let SelectDoctorList = () => {
-        let pr = realm.objects('DoctorsList').sorted('Date', true).sorted('Time', true)
+        let pr = realm.objects('DoctorsList')
+        //.sorted('Date', false)
+        let x = Array.from(pr)
+        
         if (pr.length > 0) {
+
+            let sortdata = x.sort( fieldSorter(['Date', 'Time']))
+
+            console.log('x',sortdata)
+            setDoctorLists(sortdata)
+        }
+        else
+        {
             setDoctorLists(pr)
         }
     }

@@ -170,7 +170,7 @@ export const MedicalknowledgeList =
                     ·   <strong>بیماری کلیوی مرحله  نهایی
                      (<a href="file:///F:/project/%D9%85%D8%AA%D9%88%D9%86%20%D9%85%D9%86%D9%88%20%D9%86%D8%B1%D9%85%20%D8%A7%D9%81%D8%B2%D8%A7%D8%B1-%20%D8%A8%D8%B1%D9%86%D8%A7%D9%85%D9%87%20%D9%86%D9%88%DB%8C%D8%B3.docx#_ftn1" name="_ftnref1"
                      title=""></a></strong><strong>ESRD<a href="file:///F:/project/%D9%85%D8%AA%D9%88%D9%86%20%D9%85%D9%86%D9%88%20%D9%86%D8%B1%D9%85%20%D8%A7%D9%81%D8%B2%D8%A7%D8%B1-%20%D8%A8%D8%B1%D9%86%D8%A7%D9%85%D9%87%20%D9%86%D9%88%DB%8C%D8%B3.docx#_ftn2" name="_ftnref2"
-                     title=""></a>/ ESKD (End Stage Renal Disease) </strong><strong></strong><strong>):</strong>بیماری 
+                     title=""></a>/ ESKD = End Stage Renal or Kidney  Disease </strong><strong></strong><strong>):</strong>بیماری 
                      کلیوی مرحله نهایی یک وضعیت پزشکی است که در آن کلیه‌های فرد به طور دائمی کار
                      نمی‌کنند  و نمی‌توانند خون مواد زائد و مایعات اضافی را فیلتر کنند که برای
                      زنده ماندن نیاز  به دیالیز یا پیوند کلیه می‌باشد. <strong></strong>
@@ -203,7 +203,7 @@ export const MedicalknowledgeList =
                 
                  <p dir="RTL">
               
-                 ·    <strong>بیماری عروق کرونر(</strong><strong>CAD (Coronary Artery Disease)</strong><strong>):</strong><strong></strong>رایج 
+                 ·    <strong>بیماری عروق کرونر(</strong><strong>CAD = Coronary Artery Disease </strong><strong>):</strong><strong></strong>رایج 
                      ترین نوع بیماری قلبی نیز بیماری عروق  کرونر به حساب می آید که گردش خون به
                      سمت قلب را تحت تاثیر قرار می دهد.<strong></strong>بیماری عروق کرونر به دلیل
                      تجمع پلاک در دیواره عروق کرونر، رگ‌های خونی که اکسیژن و خون را  به قلب
@@ -224,7 +224,7 @@ export const MedicalknowledgeList =
                      </p>
                  
                  <p dir="RTL">
-                 ·    <strong>بیماری شریان محیطی(</strong><strong>PAD (Peripheral Artery Disease)</strong><strong>):</strong>بیماری 
+                 ·    <strong>بیماری شریان محیطی(</strong><strong>PAD = Peripheral Artery Disease </strong><strong>):</strong>بیماری 
                      شریان محیطی  به انسداد جزئی یا کامل عروق محیطی اندام فوقانی و تحتانی اشاره
                      دارد. رسوبات چربی  در پوشش داخلی دیواره شریان پاها تجمع می‌یابد، آنها را
                      باریک‌تر می‌کند و جریان خون  را مختل می‌کند و حتی می‌تواند جریان خون را به

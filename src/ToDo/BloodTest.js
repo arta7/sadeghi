@@ -41,6 +41,7 @@ export default BloodTest = (props) => {
     const [showModal, setShowModal] = useState(false)
     const [showDateModal, setshowDateModal] = useState(false)
     const [Time, setTime] = useState('ناشتا')
+    const [TimeIndex, setTimeIndex] = useState(0)
     const [Amount, setAmount] = useState('')
     const [Counter, setCounter] = useState(1)
     const [BloodTestList, setBloodTestList] = useState([])
@@ -71,30 +72,26 @@ export default BloodTest = (props) => {
         drawerRef?.current._root.open()
     }
 
-    async function requestStoragePermission() {
-        const granted = await PermissionsAndroid.request(
-            PermissionsAndroid.PERMISSIONS.SCHEDULE_EXACT_ALARM,
-            {
-                'title': 'Example App',
-                'message': 'Example App access to your location '
-            }
-        )
-        if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-            console.log('tets')
-        }
+    // async function requestStoragePermission() {
+    //     const granted = await PermissionsAndroid.request(
+    //         PermissionsAndroid.PERMISSIONS.SCHEDULE_EXACT_ALARM,
+    //         {
+    //             'title': 'Example App',
+    //             'message': 'Example App access to your location '
+    //         }
+    //     )
+    //     if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+    //         console.log('tets')
+    //     }
 
 
-    }
+    // }
 
     useEffect(() => {
 
-
-
-
-        SelectBloodTestList()
-
-
-    }, [Counter])
+         SelectBloodTestList()
+       
+    }, [])
 
 
     let DeleteِBloodTestList = (_id) => {
@@ -106,10 +103,15 @@ export default BloodTest = (props) => {
             {
                 text: 'بله', onPress: () => {
                     let pr = realm.objects('BloodTestList').filtered('Id = $0', _id)
+                    console.log('pr', pr)
+
                     realm.write(() => {
                         realm.delete(pr)
                     })
-                    setCounter(Counter + 1)
+
+                    SelectBloodTestList()
+                  
+
                 }
             },
         ])
@@ -136,7 +138,8 @@ export default BloodTest = (props) => {
                         Id: ID,
                         Amount: Amount,
                         Time: Time,
-                        Date: selectedGeShowDate.toString()
+                        Date: selectedGeShowDate.toString(),
+                        ItemIndex: TimeIndex.toString()
                     });
                 })
             }
@@ -163,7 +166,8 @@ export default BloodTest = (props) => {
                         Id: ID,
                         Amount: Amount,
                         Time: Time,
-                        Date: selectedGeShowDate.toString()
+                        Date: selectedGeShowDate.toString(),
+                        ItemIndex: TimeIndex.toString()
                     });
                 })
 
@@ -175,8 +179,9 @@ export default BloodTest = (props) => {
             setselectedId(0)
             setAmount('')
             setTime('ناشتا')
+            setTimeIndex(0)
             setselectedShowDate(null)
-
+            SelectBloodTestList()
 
         }
         else {
@@ -184,9 +189,46 @@ export default BloodTest = (props) => {
         }
     }
 
+    function fieldSorter(fields) {
+        return function (a, b) {
+            return fields
+                .map(function (o) {
+                    var dir = 1;
+                    if (o[0] === '-') {
+                        dir = -1;
+                        o = o.substring(1);
+                    }
+                    if (a[o] > b[o]) return dir;
+                    if (a[o] < b[o]) return -(dir);
+                    return 0;
+                })
+                .reduce(function firstNonZeroValue(p, n) {
+                    return p ? p : n;
+                }, 0);
+        };
+    }
+
     let SelectBloodTestList = () => {
-        let pr = realm.objects('BloodTestList').sorted('Date', false);
+        let pr = realm.objects('BloodTestList')
+
+        console.log('pr after change : ', pr)
+
+
         if (pr.length > 0) {
+            let x = Array.from(pr)
+            let sortdata = x.sort(fieldSorter(['Date', 'ItemIndex']))
+
+            console.log('x', sortdata)
+
+            // pr = pr.sort(function (a, b) {
+            //     return a.ItemIndex.localeCompare(b.ItemIndex)
+            // });
+
+            setBloodTestList(sortdata)
+
+        }
+        else
+        {
             setBloodTestList(pr)
         }
     }
@@ -268,6 +310,9 @@ export default BloodTest = (props) => {
                         <Text style={{ color: 'black', fontSize: wp(2.5), fontWeight: 'bold' }}>زمان تست</Text>
 
                     </View>
+                    {/* <View style={{ width: '5%', height: '100%', justifyContent: 'center', alignItems: 'center', borderLeftWidth: 1 }}>
+                        <Text style={{ color: 'black', fontSize: wp(2.5), fontWeight: 'bold' }}>Ind</Text>
+                    </View> */}
                     <View style={{ width: '20%', height: '100%', justifyContent: 'center', alignItems: 'center', borderLeftWidth: 1 }}>
                         <Text style={{ color: 'black', fontSize: wp(2.5), fontWeight: 'bold' }}>میزان قند خون</Text>
                     </View>
@@ -336,13 +381,28 @@ export default BloodTest = (props) => {
                                 <Text style={{ fontSize: wp(3), color: 'black', textAlign: 'right' }} numberOfLines={1}>{item.Time}</Text>
                             </View>
 
+                            {/* <View style={{ width: '5%', height: '100%', justifyContent: 'center', borderLeftWidth: 1, justifyContent: 'center', alignItems: 'center' }}>
+                                <Text style={{ fontSize: wp(2.5), color: 'black', textAlign: 'right' }} numberOfLines={1}>{item.ItemIndex}</Text>
+                            </View> */}
 
                             <View style={{ width: '20%', height: '100%', justifyContent: 'center', borderLeftWidth: 1, justifyContent: 'center', alignItems: 'center' }}>
                                 <Text style={{ fontSize: wp(2.5), color: 'black', textAlign: 'right' }} numberOfLines={1}>{item.Amount}</Text>
                             </View>
                             <View style={{ width: '25%', height: '100%', flexDirection: 'row', padding: 5, justifyContent: 'center', alignItems: 'center' }}>
                                 <TouchableOpacity style={{ paddingHorizontal: 20 }}
-                                    onPress={() => { DeleteِBloodTestList(item.Id) }}
+                                    onPress={() => {
+                                        console.log('item id', item.Id)
+                                        try
+                                        {
+                                            DeleteِBloodTestList(item.Id)
+                                        }
+
+                                        catch
+                                        {
+
+                                        }
+                                      
+                                    }}
                                 >
                                     <Icon name='delete' color='rgba(9,132,226,1)' type="materialicon" size={wp(6)} />
                                 </TouchableOpacity>
@@ -352,6 +412,7 @@ export default BloodTest = (props) => {
                                         setselectedId(item.Id)
                                         setAmount(item.Amount)
                                         setTime(item.Time)
+                                        setTimeIndex(item.ItemIndex)
                                         let mydate = new Date(item.Date);
                                         setselectedGeStartDate(mydate);
                                         var dataJalali = moment(mydate).format('jYYYY-jMM-jDD');
@@ -430,8 +491,11 @@ export default BloodTest = (props) => {
                                             selectionColor='rgba(9,132,226,1)'
                                             selectedValue={Time}
 
-                                            onValueChange={(itemValue, itemIndex) =>
+                                            onValueChange={(itemValue, itemIndex) => {
                                                 setTime(itemValue)
+                                                console.log('itemIndex', itemIndex)
+                                                setTimeIndex(itemIndex)
+                                            }
                                             }>
                                             <SelectPicker.Item label="ناشتا" value="ناشتا" />
                                             <SelectPicker.Item label="دو ساعت بعد از صبحانه" value="دو ساعت بعد از صبحانه" />
@@ -527,7 +591,7 @@ export default BloodTest = (props) => {
                                                 onDateChange={onDateChange}
                                                 scaleFactor={wp(110)}
                                                 maxDate={new Date()}
-                                                
+
 
                                                 initialDate={moment.utc(selectedGeShowDate)}
 
