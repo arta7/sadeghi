@@ -206,16 +206,19 @@ export default DoctorTodo = (props) => {
         }
     }
     function fieldSorter(fields) {
+        console.log('fields',fields)
         return function (a, b) {
             return fields
                 .map(function (o) {
+                    console.log('a [',[o],a[o])
+                    console.log('b [',[o],b[o])
                     var dir = 1;
                     if (o[0] === '-') {
                        dir = -1;
                        o=o.substring(1);
                     }
-                    if (a[o] > b[o]) return dir;
-                    if (a[o] < b[o]) return -(dir);
+                    if (a[o] >= b[o]) return -(dir);
+                    if (a[o] < b[o]) return (dir);
                     return 0;
                 })
                 .reduce(function firstNonZeroValue (p,n) {
@@ -226,12 +229,15 @@ export default DoctorTodo = (props) => {
 
     let SelectDoctorList = () => {
         let pr = realm.objects('DoctorsList')
-        //.sorted('Date', false)
+        //.sorted("Date",false)
+        
         let x = Array.from(pr)
+
+        console.log('X',x)
         
         if (pr.length > 0) {
 
-            let sortdata = x.sort( fieldSorter(['Date', 'Time']))
+            let sortdata = x.sort((a, b) => new Date(a.Date) - new Date(b.Date))
 
             console.log('x',sortdata)
             setDoctorLists(sortdata)
@@ -446,6 +452,11 @@ export default DoctorTodo = (props) => {
                                 }}
                                     onPress={() => {
                                         console.log('selectedGeStartDate : ', selectedGeStartDate.toLocaleDateString('en-US'))
+                                        let mydate = new Date(selectedGeStartDate);
+                                        setselectedGeStartDate(mydate);
+                                        var dataJalali = moment(mydate).format('jYYYY-jMM-jDD');
+                                        console.log('datae', dataJalali)
+                                        setsetselectedStartDate(dataJalali)
                                         setshowDateModal(true)
 
                                     }}>

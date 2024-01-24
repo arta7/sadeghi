@@ -193,13 +193,15 @@ export default BloodTest = (props) => {
         return function (a, b) {
             return fields
                 .map(function (o) {
+                    console.log('a [',[o],a[o])
+                    console.log('b [',[o],b[o])
                     var dir = 1;
                     if (o[0] === '-') {
                         dir = -1;
                         o = o.substring(1);
                     }
                     if (a[o] > b[o]) return dir;
-                    if (a[o] < b[o]) return -(dir);
+                    if (a[o] <= b[o]) return -(dir);
                     return 0;
                 })
                 .reduce(function firstNonZeroValue(p, n) {
@@ -207,6 +209,10 @@ export default BloodTest = (props) => {
                 }, 0);
         };
     }
+
+
+    
+
 
     let SelectBloodTestList = () => {
         let pr = realm.objects('BloodTestList')
@@ -216,13 +222,50 @@ export default BloodTest = (props) => {
 
         if (pr.length > 0) {
             let x = Array.from(pr)
-            let sortdata = x.sort(fieldSorter(['Date', 'ItemIndex']))
+            
+            let sortdata = x.sort((a, b) => {
+                if((a.ItemIndex) - (b.ItemIndex)>0)
+                {
+                    return 1;
+              
+                   
+                }
+                else  if((a.ItemIndex) - (b.ItemIndex)<0)
+                {
+                    return -1;
+                
+                }
+                else
+                {
+                    console.log('ItemIndex = > ',a , b )
+                    return 0;
+                  
+                }
+               
+             })
 
+             sortdata  = sortdata.sort((a, b) => {
+                    if(new Date(a.Date).setHours(0,0,0,0) - new Date(b.Date).setHours(0,0,0,0)>0)
+                    {
+
+                        return 1;
+                  
+                       
+                    }
+                    else   if(new Date(a.Date).setHours(0,0,0,0) - new Date(b.Date).setHours(0,0,0,0)<0)
+                    {
+                        return -1;
+                    
+                    }
+                    else
+                    {
+                        console.log('ItemIndex = > ',a , b )
+                        return 0;
+                      
+                    }
+                   
+                 })
             console.log('x', sortdata)
-
-            // pr = pr.sort(function (a, b) {
-            //     return a.ItemIndex.localeCompare(b.ItemIndex)
-            // });
 
             setBloodTestList(sortdata)
 
@@ -461,7 +504,13 @@ export default BloodTest = (props) => {
                                     backgroundColor: 'rgba(9,132,226,1)', justifyContent: 'center', alignItems: 'center'
                                 }}
                                     onPress={() => {
+
                                         console.log('selectedGeStartDate : ', selectedGeStartDate.toLocaleDateString('en-US'))
+                                        let mydate = new Date(selectedGeStartDate);
+                                        setselectedGeStartDate(mydate);
+                                        var dataJalali = moment(mydate).format('jYYYY-jMM-jDD');
+                                        console.log('datae', dataJalali)
+                                        setsetselectedStartDate(dataJalali)
                                         setshowDateModal(true)
 
                                     }}>
@@ -591,6 +640,7 @@ export default BloodTest = (props) => {
                                                 onDateChange={onDateChange}
                                                 scaleFactor={wp(110)}
                                                 maxDate={new Date()}
+                                               
 
 
                                                 initialDate={moment.utc(selectedGeShowDate)}
